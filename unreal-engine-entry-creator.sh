@@ -10,6 +10,9 @@ if [ ! -d "$UE_PATH" ]; then
     exit 1
 fi
 
+# Define the icon path
+ICON_BMP="$UE_PATH/Engine/Content/Splash/IconDefault.bmp"
+
 # Ask if the user wants to force the icon conversion
 read -p "Do you want to force the icon conversion from BMP to PNG? (y/n): " FORCE_ICON_CONVERSION
 
@@ -23,7 +26,7 @@ if [ "$FORCE_ICON_CONVERSION" == "y" ]; then
     fi
 
     # Convert BMP icon to PNG
-    ICON_BMP="$UE_PATH/Engine/Content/Splash/IconDefault.bmp"
+    
     ICON_PNG="$UE_PATH/Engine/Content/Splash/IconDefault.png"
 
     if [ -f "$ICON_BMP" ]; then
@@ -54,5 +57,8 @@ Terminal=false
 Type=Application
 Categories=Development
 EOF
+
+# Refresh the desktop database
+update-desktop-database ~/.local/share/applications/
 
 echo "Unreal Engine entry created successfully!"
