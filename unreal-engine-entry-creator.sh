@@ -42,13 +42,27 @@ fi
 # Ask for use UE_PATH as name in the menu
 read -p "Do you want to use the Unreal Engine installation path as the name in the menu? It will use the last subdirectory (current: $(basename "$UE_PATH")) (y/n): " USE_PATH_AS_NAME
 
+if [ "$USE_PATH_AS_NAME" != "y" ] && [ "$USE_PATH_AS_NAME" != "n" ]; then
+    echo "Invalid input. Please enter 'y' or 'n'."
+    exit 1
+fi
+
+if [ "$USE_PATH_AS_NAME" == "n" ]; then
+    read -p "Enter the desired name for the Unreal Engine entry in the menu: " CUSTOM_NAME
+    if [ -z "$CUSTOM_NAME" ]; then
+        echo "Name cannot be empty. Please try again."
+        exit 1
+    fi
+fi
+
 BASENAME_PATH=$(basename "$UE_PATH")
+BASENAME_FILENAME=$(basename "$CUSTOM_NAME")
 
 # Create the .desktop file
-cat <<EOF > ~/.local/share/applications/unreal-engine.desktop
+cat <<EOF > ~/.local/share/applications/$BASENAME_FILENAME.desktop
 [Desktop Entry]
-Name=$(if [ "$USE_PATH_AS_NAME" == "y" ]; then echo "$BASENAME_PATH"; else echo "Unreal Engine"; fi)
-Comment=$(if [ "$USE_PATH_AS_NAME" == "y" ]; then echo "$BASENAME_PATH"; else echo "Unreal Engine"; fi)
+Name=$(if [ "$USE_PATH_AS_NAME" == "y" ]; then echo "$BASENAME_PATH"; else echo "$CUSTOM_NAME"; fi)
+Comment=$(if [ "$USE_PATH_AS_NAME" == "y" ]; then echo "$BASENAME_PATH"; else echo "$CUSTOM_NAME"; fi)
 Keywords=Unreal; Unreal Engine; unreal; engine;
 Exec=$UE_PATH/Engine/Binaries/Linux/UnrealEditor
 Icon=$(if [ -f "$ICON_PNG" ]; then echo "$ICON_PNG"; else echo "$ICON_BMP"; fi)

@@ -35,6 +35,7 @@ The script automates the process of creating a desktop application entry for Unr
     -   **Enter the Unreal Engine installation path**: Provide the full path to your Unreal Engine installation directory (e.g., `/home/user/Games/UE_5.4`).
     -   **Force icon conversion**: Answer `y` if you want to convert the icon from `.bmp` to `.png`. This is recommended for Gnome.
     -   **Use path as name**: Answer `y` if you want the application menu entry to be named after the installation folder (e.g., `UE_5.4`). Otherwise, it will be named "Unreal Engine".
+    -   **Add entry name**: If you answer `n` to the previous question, you will be prompted to enter the desired name for the entry.
 
 After the script finishes, you should be able to find the Unreal Engine entry in your application menu.
 
