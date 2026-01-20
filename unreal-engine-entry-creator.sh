@@ -56,7 +56,7 @@ if [ "$USE_PATH_AS_NAME" == "n" ]; then
 fi
 
 BASENAME_PATH=$(basename "$UE_PATH")
-BASENAME_FILENAME=$(basename "$CUSTOM_NAME")
+BASENAME_FILENAME="unreal-engine-$BASENAME_PATH"
 
 # Create the .desktop file
 cat <<EOF > ~/.local/share/applications/$BASENAME_FILENAME.desktop
